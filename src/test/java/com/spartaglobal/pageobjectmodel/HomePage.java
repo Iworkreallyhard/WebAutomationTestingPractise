@@ -13,7 +13,7 @@ public class HomePage {
         }
 
 
-        public SignInPage goToLoginPage(){
+        public SignInPage goToSignInPage(){
             webDriver.findElement(By.linkText("Sign in")).click();
             return new SignInPage(webDriver);
         }
@@ -22,6 +22,11 @@ public class HomePage {
         public CheckoutSummary goToCheckout(){
             webDriver.findElement(By.cssSelector("#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a")).click();
             return new CheckoutSummary(webDriver);
+        }
+
+
+        public void addItemToBasket(){
+
         }
 
 
