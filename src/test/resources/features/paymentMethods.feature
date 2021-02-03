@@ -1,0 +1,21 @@
+Feature: Different payment methods return confirmation
+
+  Background: I am logged in and have items in my basket
+    Given I am logged in as a user
+    And I have 1 items in my basket
+
+  Scenario: Paying by bank wire will return me a confirmation page
+    Given I am at selecting payment method
+    When I select pay by bank wire
+    And I confirm the order
+    Then I am shown an order confirmation
+    And My basket is empty
+    And My order should be logged with payment method "Bank wire"
+
+  Scenario: Paying by check will return me a confirmation page
+    Given I am at selecting payment method
+    When I select pay by check
+    And I confirm the order
+    Then I am shown an order confirmation
+    And My basket is empty
+    And My order should be logged with payment method "Payment by check"
