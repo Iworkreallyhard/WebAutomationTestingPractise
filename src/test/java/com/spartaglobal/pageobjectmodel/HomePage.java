@@ -13,9 +13,9 @@ public class HomePage {
         }
 
 
-        public LoginPage goToLoginPage(){
+        public SignInPage goToLoginPage(){
             webDriver.findElement(By.linkText("Sign in")).click();
-            return new LoginPage(webDriver);
+            return new SignInPage(webDriver);
         }
 
 
