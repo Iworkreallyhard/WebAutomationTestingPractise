@@ -14,7 +14,12 @@ Feature: Logging in and out
     When I am logging in
     Then I should be logged in
 
-    Scenario: I am logging out
-      Given I am logged in
-      When I am logging out
-      Then I should be logged out
+  Scenario: I am logging out
+    Given I am logged in
+    When I am logging out
+    Then I should be logged out
+
+  Scenario: I am logging out with products in the basket
+    Given I am logged in with 1 item in basket
+    When I am logging out
+    Then I should have 0 items in my basket
