@@ -10,8 +10,8 @@ public class PaymentMethods {
     public void iAmLoggedInAsAUser() {
     }
 
-    @And("I have {int} item(s) in my/the basket")
-    public void iHaveItemsInMyBasket(int arg0) {
+    @And("I have {int} item(s) in my/the cart")
+    public void iHaveItemsInMyCart(int arg0) {
     }
 
     @Given("I am at selecting payment method/step")
@@ -30,8 +30,8 @@ public class PaymentMethods {
     public void iAmShownAnOrderConfirmation() {
     }
 
-    @And("My basket is empty")
-    public void myBasketIsEmpty() {
+    @And("My cart is empty")
+    public void myCartIsEmpty() {
     }
 
     @When("I select pay by check")
