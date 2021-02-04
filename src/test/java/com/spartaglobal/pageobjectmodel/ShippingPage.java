@@ -25,9 +25,9 @@ public class ShippingPage {
         webDriver.findElement(By.id("cgv")).click();
     }
 
-    public CheckoutSummary clickCheckout() {
+    public PaymentPage clickCheckout() {
         webDriver.findElement(checkoutButton).click();
-        return new CheckoutSummary(webDriver);
+        return new PaymentPage(webDriver);
     }
 
     public HomePage goBackToAddress() {
