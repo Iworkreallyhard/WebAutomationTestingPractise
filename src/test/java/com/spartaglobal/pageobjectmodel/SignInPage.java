@@ -2,8 +2,9 @@ package com.spartaglobal.pageobjectmodel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class SignInPage {
+public class SignInPage implements Login, StandardProcedures{
 	WebDriver webDriver;
 	By createEmail = By.id("email_create");
 	By submitCreateAccount = By.id("SubmitCreate");
@@ -64,5 +65,23 @@ public class SignInPage {
 		return new CheckoutSummary(webDriver);
 	}
 
+	@Override
+	public WebElement selectLoginEmail() {
+		return null;
+	}
 
+	@Override
+	public WebElement selectLoginPassword() {
+		return null;
+	}
+
+	@Override
+	public WebElement selectLoginButton() {
+		return null;
+	}
+
+	@Override
+	public MyAccount login(String username, String password) {
+		return null;
+	}
 }

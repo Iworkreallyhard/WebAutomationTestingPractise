@@ -3,7 +3,7 @@ package com.spartaglobal.pageobjectmodel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ConfirmationPage {
+public class ConfirmationPage implements StandardProcedures{
 
     private final WebDriver webDriver;
 

@@ -3,7 +3,7 @@ package com.spartaglobal.pageobjectmodel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AddressPage {
+public class AddressPage implements StandardProcedures{
 
     WebDriver webDriver;
 

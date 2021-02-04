@@ -2,8 +2,9 @@ package com.spartaglobal.pageobjectmodel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class MyAccount {
+public class MyAccount implements StandardProcedures{
 	WebDriver webDriver;
 	By homeButton = By.linkText("Home");
 	By logo = By.cssSelector(".logo");
@@ -22,10 +23,23 @@ public class MyAccount {
 		return new HomePage(webDriver);
 	}
 
-	public String getUrl() {
-		return webDriver.getCurrentUrl();
+	@Override
+	public WebElement selectCart() {
+		return null;
 	}
 
+	@Override
+	public WebElement selectLogo() {
+		return null;
+	}
 
+	@Override
+	public HomePage gotoHome() {
+		return null;
+	}
 
+	@Override
+	public CheckoutSummary gotoCart() {
+		return null;
+	}
 }

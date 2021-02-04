@@ -3,7 +3,7 @@ package com.spartaglobal.pageobjectmodel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutSignInPage {
+public class CheckoutSignInPage implements Login{
     WebDriver webDriver;
     By createEmail = By.id("email_create");
     By submitCreateAccount = By.id("SubmitCreate");

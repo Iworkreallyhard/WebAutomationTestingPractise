@@ -3,10 +3,13 @@ package com.spartaglobal.pageobjectmodel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class HomePage {
+public class HomePage implements StandardProcedures, ItemPopup{
 
         WebDriver webDriver;
 
@@ -31,7 +34,6 @@ public class HomePage {
         public void addTShirtToCart(){
            webDriver.findElement(By.cssSelector("#homefeatured > li.ajax_block_product.col-xs-12.col-sm-4.col-md-3.first-in-line.first-item-of-tablet-line.first-item-of-mobile-line > div > div.right-block > div.button-container > a.button.ajax_add_to_cart_button.btn.btn-default")).click();
         }
-
 
         public CheckoutSummary proceedToCheckoutFromPopUp(){
 
