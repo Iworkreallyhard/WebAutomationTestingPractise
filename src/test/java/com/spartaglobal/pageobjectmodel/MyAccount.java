@@ -25,21 +25,23 @@ public class MyAccount implements StandardProcedures{
 
 	@Override
 	public WebElement selectCart() {
-		return null;
+		return webDriver.findElement(By.cssSelector("a[title*='shopping cart']"));
 	}
 
 	@Override
 	public WebElement selectLogo() {
-		return null;
+		return webDriver.findElement(logo);
 	}
 
 	@Override
-	public HomePage gotoHome() {
-		return null;
+	public HomePage gotoHome(WebDriver webDriver) {
+		selectLogo().click();
+		return new HomePage(webDriver);
 	}
 
 	@Override
-	public CheckoutSummary gotoCart() {
-		return null;
+	public CheckoutSummary gotoCart(WebDriver webDriver) {
+		selectCart().click();
+		return new CheckoutSummary(webDriver);
 	}
 }
