@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        tags = "@tagSparta",
+        tags = "@addToCart",
         features = {"src/test/resources/features"},
-        plugin = {"pretty", "html:target/reports/XMLReport.html"}
+        plugin = {"pretty"}
 )
 public class TestRunner {
 }
