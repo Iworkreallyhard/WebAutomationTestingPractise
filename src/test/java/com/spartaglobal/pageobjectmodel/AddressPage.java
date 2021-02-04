@@ -7,7 +7,7 @@ public class AddressPage {
 
     WebDriver webDriver;
 
-    By checkoutButton = By.linkText("Proceed to checkout");
+    By checkoutButton = By.name("processAddress");
     By continueShoppingButton = By.linkText("Continue shopping");
     
     public AddressPage(WebDriver webDriver) {
