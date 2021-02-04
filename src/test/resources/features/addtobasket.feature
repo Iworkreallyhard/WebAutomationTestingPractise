@@ -2,12 +2,12 @@
 # Tags: optional
 
 Feature: Adding and removing from cart
+  #change cart is empty/not empty, say cart has INT items
   @addToCart
   Scenario: I add a product to cart
     Given the cart is empty
     When  I add 1 product
-    Then success message is shown
-    And 1 more product is in the cart
+    Then 1 more product is in the cart
 
   Scenario: I add a product to cart containing products
     Given the cart is not empty

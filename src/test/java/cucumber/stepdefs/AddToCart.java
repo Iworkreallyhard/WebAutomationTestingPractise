@@ -13,6 +13,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class AddToCart {
 
@@ -34,17 +38,15 @@ public class AddToCart {
     public void iAddProduct(int arg0) {
         webDriver.findElement(By.linkText("Faded Short Sleeve T-shirts")).click();
         webDriver.findElement(By.id("quantity_wanted")).sendKeys(Keys.chord(Keys.BACK_SPACE, String.valueOf(arg0)));
-        webDriver.findElement(By.className("exclusive")).click(); //doesn't work, find another way
+        webDriver.findElement(By.id("add_to_cart")).click();
     }
 
-    @Then("success message is shown")
-    public void successMessageIsShown() {
-        webDriver.findElement(By.linkText("Product successfully added to your shopping cart"));
-        Assertions.assertNotNull(webDriver.findElement(By.linkText("Product successfully added to your shopping cart")));
-    }
-
-    @And("{int} more product is in the cart")
+    @Then("{int} more product is in the cart")
     public void moreProductIsInTheCart(int arg0) {
+        WebDriverWait wait = new WebDriverWait(webDriver,1);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ajax_cart_quantity")));
+        String numOfProducts = webDriver.findElement(By.className("ajax_cart_quantity")).getText();
+        Assertions.assertEquals(String.valueOf(arg0), numOfProducts);
     }
 
     @Given("the cart is not empty")
