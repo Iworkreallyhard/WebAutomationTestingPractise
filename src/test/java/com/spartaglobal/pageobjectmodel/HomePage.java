@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.concurrent.TimeUnit;
+
 public class HomePage {
 
         WebDriver webDriver;
@@ -32,7 +34,10 @@ public class HomePage {
 
 
         public CheckoutSummary proceedToCheckoutFromPopUp(){
-            webDriver.findElement(By.className("btn btn-default button button-medium")).click();
+
+            webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+            webDriver.findElement(By.linkText("Proceed to checkout")).click();
             return new CheckoutSummary(webDriver);
         }
 
