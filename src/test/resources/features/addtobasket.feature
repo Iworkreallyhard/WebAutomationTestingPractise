@@ -2,7 +2,7 @@
 # Tags: optional
 
 Feature: Adding and removing from cart
-
+  @addToCart
   Scenario: I add a product to cart
     Given the cart is empty
     When  I add 1 product
