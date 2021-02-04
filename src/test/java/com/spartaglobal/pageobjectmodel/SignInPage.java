@@ -43,14 +43,15 @@ public class SignInPage {
 		webDriver.findElement(loginPassword).sendKeys(password);
 	}
 
-	public void clickSignIn(){
+	public MyAccount clickSignIn(){
 		webDriver.findElement(submitLogin).click();
+		return new MyAccount(webDriver);
 	}
 
-	public void SignIn(String email, String password){
+	public MyAccount SignIn(String email, String password){
 		enterEmailInLogIn(email);
 		enterPasswordInLogIn(password);
-		clickSignIn();
+		return clickSignIn();
 	}
 
 	public HomePage clickLogo(){
