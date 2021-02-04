@@ -67,7 +67,7 @@ public class PathTests {
 		CheckoutSummary checkoutSummary = homePage.goToCheckout();
 		CheckoutSignInPage checkoutSignInPage = checkoutSummary.goToCheckoutNotLoggedIn();
 
-		AddressPage addressPage = checkoutSignInPage.signIn(username,password);
+		AddressPage addressPage = checkoutSignInPage.SignIn(username,password);
 		ShippingPage shippingPage = addressPage.goToCheckout();
 		shippingPage.clickOnAgreeToTC();
 		PaymentPage paymentPage = shippingPage.clickCheckout();
