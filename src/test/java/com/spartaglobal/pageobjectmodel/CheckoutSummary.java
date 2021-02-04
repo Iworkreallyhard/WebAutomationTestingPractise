@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+
 public class CheckoutSummary implements StandardProcedures{
 
     WebDriver webDriver;
@@ -17,6 +18,8 @@ public class CheckoutSummary implements StandardProcedures{
     By checkoutButton = By.linkText("Proceed to checkout");
     By quantityBox = By.className("cart_quantity_input form-control grey");
     By continueShopping = By.linkText("Continue shopping");
+    By cart = By.cssSelector("#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a");
+    By logo = By.cssSelector("#header_logo > a > img");
 
     public CheckoutSummary(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -80,8 +83,25 @@ public class CheckoutSummary implements StandardProcedures{
     }
 
 
+    @Override
+    public WebElement selectCart() {
+        return webDriver.findElement(cart);
+    }
 
+    @Override
+    public WebElement selectLogo() {
+        return webDriver.findElement(logo);
+    }
 
+    @Override
+    public HomePage gotoHome(WebDriver webDriver) {
+        selectLogo().click();
+        return new HomePage(webDriver);
+    }
 
-
+    @Override
+    public CheckoutSummary gotoCart(WebDriver webDriver) {
+        selectCart().click();
+        return new CheckoutSummary(webDriver);
+    }
 }

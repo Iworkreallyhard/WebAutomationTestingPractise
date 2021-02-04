@@ -67,21 +67,46 @@ public class SignInPage implements Login, StandardProcedures{
 
 	@Override
 	public WebElement selectLoginEmail() {
-		return null;
+		return webDriver.findElement(loginEmail);
 	}
 
 	@Override
 	public WebElement selectLoginPassword() {
-		return null;
+		return webDriver.findElement(loginPassword);
 	}
 
 	@Override
 	public WebElement selectLoginButton() {
-		return null;
+		return webDriver.findElement(submitLogin);
 	}
 
 	@Override
 	public MyAccount login(String username, String password) {
-		return null;
+		selectLoginEmail().sendKeys(username);
+		selectLoginPassword().sendKeys(password);
+		selectLoginButton().click();
+		
+		return new MyAccount(webDriver);
+	}
+
+	@Override
+	public WebElement selectCart() {
+		return webDriver.findElement(By.cssSelector("a[title*='shopping cart']"));
+	}
+	@Override
+	public WebElement selectLogo(){
+		return webDriver.findElement(logo);
+	}
+
+	@Override
+	public HomePage gotoHome(WebDriver webDriver) {
+		selectLogo().click();
+		return new HomePage(webDriver);
+	}
+
+	@Override
+	public CheckoutSummary gotoCart(WebDriver webDriver) {
+		selectCart().click();
+		return new CheckoutSummary(webDriver);
 	}
 }
