@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ShippingPage {
     WebDriver webDriver;
-    By checkoutButton = By.cssSelector("#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a");
+    By checkoutButton = By.name("processCarrier");
     By continueShoppingButton = By.linkText("Continue shopping");
     By signIn = By.linkText("Sign in");
     By summary = By.linkText("Summary");

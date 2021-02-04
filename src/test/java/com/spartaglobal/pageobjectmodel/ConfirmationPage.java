@@ -17,7 +17,7 @@ public class ConfirmationPage {
     }
 
     public OrderConfirmationPage clickConfirmMyOrder(){
-        webDriver.findElement(By.partialLinkText("confirm my order")).click();
+        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
         return new OrderConfirmationPage(webDriver);
     }
 }
