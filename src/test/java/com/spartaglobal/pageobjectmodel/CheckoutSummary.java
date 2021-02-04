@@ -3,6 +3,9 @@ package com.spartaglobal.pageobjectmodel;
 import com.spartaglobal.pageobjectmodel.enums.Product_ID;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class CheckoutSummary {
 
@@ -61,6 +64,19 @@ public class CheckoutSummary {
     public HomePage goBackToShopping() {
         webDriver.findElement(continueShopping).click();
         return new HomePage(webDriver);
+    }
+
+    public String getQuantity(){
+
+        List<WebElement> inputs = webDriver.findElements(By.tagName("input"));
+
+        for (WebElement webElement : inputs){
+            if (webElement.getAttribute("name").equals("quantity_1_1_0_0_hidden")){
+                return webElement.getAttribute("value");
+            }
+        }
+
+        return null;
     }
 
 
