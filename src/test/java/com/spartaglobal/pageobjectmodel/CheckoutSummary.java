@@ -15,8 +15,8 @@ public class CheckoutSummary implements StandardProcedures{
     By checkoutButton = By.linkText("Proceed to checkout");
     By quantityBox = By.className("cart_quantity_input form-control grey");
     By continueShopping = By.linkText("Continue shopping");
-    By cart = By.cssSelector("#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a");
-    By logo = By.cssSelector("#header_logo > a > img");
+    By cart = By.cssSelector("a[title*='shopping cart']");
+    By logo = By.cssSelector("img[class*='logo']");
 
     public CheckoutSummary(WebDriver webDriver) {
         this.webDriver = webDriver;
