@@ -3,7 +3,7 @@ package com.spartaglobal.pageobjectmodel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ConfirmationPage {
+public class ConfirmationPage implements StandardProcedures{
 
     private final WebDriver webDriver;
 
@@ -17,7 +17,7 @@ public class ConfirmationPage {
     }
 
     public OrderConfirmationPage clickConfirmMyOrder(){
-        webDriver.findElement(By.cssSelector("button[type='submit']")).click();
+        webDriver.findElement(By.cssSelector("button[type='submit']:not([name*='search'])")).click();
         return new OrderConfirmationPage(webDriver);
     }
 }
