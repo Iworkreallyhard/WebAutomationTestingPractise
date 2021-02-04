@@ -44,9 +44,14 @@ public class CheckoutSummary {
         webDriver.findElement(trashIcon).click();
     }
 
-    public CheckoutSignInPage goToCheckout() {
+    public CheckoutSignInPage goToCheckoutNotLoggedIn() {
         webDriver.findElement(checkoutButton).click();
         return new CheckoutSignInPage(webDriver);
+    }
+
+    public AddressPage goToCheckoutLoggedIn() {
+        webDriver.findElement(checkoutButton).click();
+        return new AddressPage(webDriver);
     }
 
     public void insertQuantityIntoBox(String quantity) {
