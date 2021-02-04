@@ -40,6 +40,11 @@ public class HomePage {
             webDriver.findElement(By.linkText("Proceed to checkout")).click();
             return new CheckoutSummary(webDriver);
         }
+        
+        
+        public String getUrl(){
+            return webDriver.getCurrentUrl();
+        }
 
 
 

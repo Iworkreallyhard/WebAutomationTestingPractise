@@ -22,6 +22,10 @@ public class MyAccount {
 		return new HomePage(webDriver);
 	}
 
+	public String getUrl() {
+		return webDriver.getCurrentUrl();
+	}
+
 
 
 }

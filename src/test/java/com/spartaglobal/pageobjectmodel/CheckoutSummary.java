@@ -75,7 +75,6 @@ public class CheckoutSummary {
                 return webElement.getAttribute("value");
             }
         }
-
         return null;
     }
 
