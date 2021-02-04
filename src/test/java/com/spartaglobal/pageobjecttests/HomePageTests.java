@@ -16,7 +16,7 @@ import java.util.Properties;
 public class HomePageTests {
 
 
-    private static Properties properties = new Properties();
+    static Properties properties = new Properties();
     private SignInPage signInPage;
     private CheckoutSummary checkoutSummary;
     private static HomePage homePage;
@@ -27,7 +27,7 @@ public class HomePageTests {
 
 
     @BeforeAll
-    static void setup() {
+    static void doStuff() {
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
 
@@ -43,29 +43,14 @@ public class HomePageTests {
 
     @Test
     void checkIsOnHomePage(){
-        WebDriver webDriver = new ChromeDriver();
-        HomePage testHomePage = new HomePage(webDriver);
 
-        Assertions.assertEquals("http://automationpractice.com/index.php", testHomePage.getUrl());
-    }
-
-    @Test
-    void checkCanAccessSignIn(){
-        homePage.goToSignInPage();
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", homePage.getUrl());
-    }
-
-    @Test
-    void checkCanGoToCheckout(){
-        homePage.goToCheckout();
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", homePage.getUrl());
     }
 
     @Test
     void checkCanAddItemToCart(){
         homePage.addTShirtToCart();
         checkoutSummary = homePage.proceedToCheckoutFromPopUp();
-        Assertions.assertEquals("1", checkoutSummary.getQuantity());
+       Assertions.assertEquals("1", checkoutSummary.getQuantity());
 
     }
 
