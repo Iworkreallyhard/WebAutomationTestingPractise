@@ -11,6 +11,7 @@ public class ShippingPage {
     By signIn = By.linkText("Sign in");
     By summary = By.linkText("Summary");
     By logo = By.cssSelector(".logo");
+    By address = By.linkText("Address");
     By homeButton = By.linkText("Home");
 
     public ShippingPage(WebDriver webDriver) {
@@ -53,6 +54,11 @@ public class ShippingPage {
     public CheckoutSummary clickSummaryTab(){
         webDriver.findElement(summary).click();
         return new CheckoutSummary(webDriver);
+    }
+
+    public AddressPage clickAddressTab() {
+        webDriver.findElement(address).click();
+        return new AddressPage(webDriver);
     }
 
     //need to test!!!
