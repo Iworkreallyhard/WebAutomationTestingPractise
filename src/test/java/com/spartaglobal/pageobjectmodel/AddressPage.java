@@ -9,6 +9,10 @@ public class AddressPage {
 
     By checkoutButton = By.linkText("Proceed to checkout");
     By continueShoppingButton = By.linkText("Continue shopping");
+    
+    public AddressPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
 
     public ShippingPage goToCheckout() {
         webDriver.findElement(checkoutButton).click();

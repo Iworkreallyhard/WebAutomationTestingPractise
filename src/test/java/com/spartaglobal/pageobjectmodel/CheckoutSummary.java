@@ -1,5 +1,6 @@
 package com.spartaglobal.pageobjectmodel;
 
+import com.spartaglobal.pageobjectmodel.enums.Product_ID;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,15 +19,28 @@ public class CheckoutSummary {
         this.webDriver = webDriver;
     }
 
-    public void clickIncreaseQuantity() {
+    public void clickIncreaseQuantityOneProduct() {
         webDriver.findElement(plusIcon).click();
     }
 
-    public void clickDecreaseQuantity() {
+    public void clickDecreaseQuantityOneProduct() {
         webDriver.findElement(minusIcon).click();
     }
 
-    public void clickTrashProduct() {
+    public void clickIncreaseQuantityByID(Product_ID product_id) {
+        webDriver.findElement(By.id(product_id.toString())).findElement(plusIcon).click();
+    }
+
+    public void clickDecreaseQuantityByID(Product_ID product_id) {
+        webDriver.findElement(By.id(product_id.toString())).findElement(minusIcon).click();
+    }
+
+    public void clickTrashProductByID(Product_ID product_id) {
+        webDriver.findElement(By.id(product_id.toString())).findElement(trashIcon).click();
+    }
+
+
+    public void clickTrashOneProduct() {
         webDriver.findElement(trashIcon).click();
     }
 
