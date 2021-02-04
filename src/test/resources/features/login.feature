@@ -8,11 +8,12 @@ Feature: Logging in and out
     When I am logging in
     Then I should be logged in
 
+  @login
   Scenario: I am logging in during the checkout process
     Given I am not logged in
     And I am checking out with 1 items in the basket
-    When I am logging in
-    Then I should be logged in
+    When I am logging in through checkout
+    Then I should be in address
 
   Scenario: I am logging out
     Given I am logged in

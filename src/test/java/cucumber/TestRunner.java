@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        tags = "@addToCart",
+        tags = "@login",
         features = {"src/test/resources/features"},
         plugin = {"pretty"}
 )
