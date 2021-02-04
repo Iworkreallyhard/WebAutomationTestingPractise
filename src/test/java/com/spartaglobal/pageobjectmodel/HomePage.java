@@ -42,6 +42,11 @@ public class HomePage implements StandardProcedures, ItemPopup{
             webDriver.findElement(By.linkText("Proceed to checkout")).click();
             return new CheckoutSummary(webDriver);
         }
+        
+        
+        public String getUrl(){
+            return webDriver.getCurrentUrl();
+        }
 
 
 
