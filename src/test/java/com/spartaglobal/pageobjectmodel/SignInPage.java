@@ -48,7 +48,7 @@ public class SignInPage {
 		return new MyAccount(webDriver);
 	}
 
-	public MyAccount SignIn(String email, String password){
+	public MyAccount signIn(String email, String password){
 		enterEmailInLogIn(email);
 		enterPasswordInLogIn(password);
 		return clickSignIn();
