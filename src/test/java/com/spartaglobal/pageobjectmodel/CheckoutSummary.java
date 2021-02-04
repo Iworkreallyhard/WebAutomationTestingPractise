@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class CheckoutSummary {
+public class CheckoutSummary implements StandardProcedures{
 
     WebDriver webDriver;
 

@@ -4,7 +4,7 @@ import io.cucumber.java.ro.Si;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ShippingPage {
+public class ShippingPage implements StandardProcedures{
     WebDriver webDriver;
     By checkoutButton = By.name("processCarrier");
     By continueShoppingButton = By.linkText("Continue shopping");
