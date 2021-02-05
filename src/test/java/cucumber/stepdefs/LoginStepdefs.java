@@ -16,13 +16,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 public class LoginStepdefs {
 
     private static WebDriver webDriver;
     private HomePage homePage;
     private MyAccount myAccount;
-    private String email = "a.rahman1198@gmail.com";
-    private String password = "thisissparta";
+    private Properties properties = new Properties();
 
 //    @After
 //    public void closeDrivers(){
@@ -42,8 +45,13 @@ public class LoginStepdefs {
 
     @When("I am logging in")
     public void iAmLoggingIn() {
+        try {
+            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SignInPage signInPage = homePage.goToSignInPage();
-        signInPage.signIn(email, password);
+        signInPage.signIn(properties.getProperty("username"), properties.getProperty("password"));
     }
 
     @Then("I should be logged in")
@@ -62,9 +70,15 @@ public class LoginStepdefs {
 
     @When("I am logging in through checkout")
     public void iAmLoggingInThroughCheckout() {
+        try {
+            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         CheckoutSummary checkoutSummary = new CheckoutSummary(webDriver);
         CheckoutSignInPage checkoutSignInPage = checkoutSummary.goToCheckoutNotLoggedIn();
-        checkoutSignInPage.SignIn(email, password);
+        checkoutSignInPage.login(properties.getProperty("username"), properties.getProperty("password"));
+        checkoutSignInPage.clickSignIn();
     }
 
     @Then("I should be in address")
@@ -74,10 +88,15 @@ public class LoginStepdefs {
 
     @Given("I am logged in")
     public void iAmLoggedIn() {
+        try {
+            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
         SignInPage signInPage = homePage.goToSignInPage();
-        myAccount = signInPage.login(email, password);
+        myAccount = signInPage.login(properties.getProperty("username"), properties.getProperty("password"));
         myAccount.gotoHome(webDriver);
     }
 
@@ -94,10 +113,15 @@ public class LoginStepdefs {
 
     @Given("I am logged in with {int} item in basket")
     public void iAmLoggedInWithItemInBasket(int arg0) {
+        try {
+            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
         SignInPage signInPage = homePage.goToSignInPage();
-        myAccount = signInPage.login(email, password);
+        myAccount = signInPage.login(properties.getProperty("username"), properties.getProperty("password"));
         myAccount.gotoHome(webDriver);
         webDriver.findElement(By.linkText("Faded Short Sleeve T-shirts")).click();
         WebDriverWait wait = new WebDriverWait(webDriver, 5);
