@@ -16,7 +16,7 @@ public class BrowserUtility {
         webDriver.manage().window().fullscreen();
     }
 
-    public static void setImplicitWay(WebDriver webDriver, long milliseconds){
+    public static void setImplicitWait(WebDriver webDriver, long milliseconds){
         webDriver.manage().timeouts().implicitlyWait(milliseconds, TimeUnit.MILLISECONDS);
     }
 }
