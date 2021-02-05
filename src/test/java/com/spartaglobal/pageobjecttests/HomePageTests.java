@@ -17,6 +17,7 @@ public class HomePageTests {
 
 
     private static Properties properties = new Properties();
+
     private SignInPage signInPage;
     private CheckoutSummary checkoutSummary;
     private static HomePage homePage;
@@ -28,6 +29,7 @@ public class HomePageTests {
 
     @BeforeAll
     static void setup() {
+
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
 
@@ -43,6 +45,7 @@ public class HomePageTests {
 
     @Test
     void checkIsOnHomePage(){
+
         WebDriver webDriver = new ChromeDriver();
         HomePage testHomePage = new HomePage(webDriver);
 
@@ -59,6 +62,7 @@ public class HomePageTests {
     void checkCanGoToCheckout(){
         homePage.goToCheckout();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=order", homePage.getUrl());
+
     }
 
     @Test
@@ -66,9 +70,5 @@ public class HomePageTests {
         homePage.addTShirtToCart();
         checkoutSummary = homePage.proceedToCheckoutFromPopUp();
         Assertions.assertEquals("1", checkoutSummary.getQuantity());
-
     }
-
-
-
 }

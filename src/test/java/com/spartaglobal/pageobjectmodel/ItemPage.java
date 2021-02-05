@@ -6,56 +6,22 @@ import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 
-public class HomePage implements StandardProcedures, ItemPopup{
+public class ItemPage implements StandardProcedures, ItemPopup {
+
 
     By logo = By.cssSelector(".logo");
-    By signIn = By.linkText("Sign in");
     By cart = By.cssSelector("a[title*='shopping cart']");
     By checkout = By.linkText("Proceed to checkout");
     By continueButton = By.linkText("Continue shopping");
     By close = By.cssSelector("span[class='cross'][title*='close']");
 
+    private WebDriver webDriver;
 
 
-
-
-        private WebDriver webDriver;
-
-        public HomePage(WebDriver driver) {
-            this.webDriver = driver;
-            webDriver.get("http://automationpractice.com/index.php");
-        }
-
-
-        public SignInPage goToSignInPage(){
-            webDriver.findElement(signIn).click();
-            return new SignInPage(webDriver);
-        }
-
-
-        public CheckoutSummary goToCheckout(){
-            webDriver.findElement(cart).click();
-            return new CheckoutSummary(webDriver);
-        }
-
-
-        public void addTShirtToCart(){
-           webDriver.findElement(By.cssSelector("#homefeatured > li.ajax_block_product.col-xs-12.col-sm-4.col-md-3.first-in-line.first-item-of-tablet-line.first-item-of-mobile-line > div > div.right-block > div.button-container > a.button.ajax_add_to_cart_button.btn.btn-default")).click();
-        }
-
-        public CheckoutSummary proceedToCheckoutFromPopUp(){
-
-            webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-            webDriver.findElement(checkout).click();
-            return new CheckoutSummary(webDriver);
-        }
-        
-        
-        public String getUrl(){
-            return webDriver.getCurrentUrl();
-        }
-
+    public ItemPage(WebDriver webDriver){
+        this.webDriver = webDriver;
+    }
+    
     @Override
     public WebElement selectCart() {
         return webDriver.findElement(cart);
@@ -108,4 +74,11 @@ public class HomePage implements StandardProcedures, ItemPopup{
     public void continueShopping() {
         selectContinueToShopping().click();
     }
+
+
+
+
+
+
+
 }
