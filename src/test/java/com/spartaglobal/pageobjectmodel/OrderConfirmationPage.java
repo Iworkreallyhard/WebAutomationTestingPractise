@@ -8,14 +8,14 @@ public class OrderConfirmationPage implements StandardProcedures {
 
     private final WebDriver webDriver;
     By logo = By.cssSelector("img[class*='logo']");
-    By cart = By.cssSelector("a[title*='shopping cart']");
+    By cart = By.cssSelector("div[class='shopping_cart']");
 
     public OrderConfirmationPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
     public OrderHistoryPage clickBackToOrders() {
-        webDriver.findElement(By.cssSelector("#center_column > p.cart_navigation.exclusive > a"));
+        webDriver.findElement(By.cssSelector("p[class*='cart_navigation'] a[title*='Back to orders']")).click();
         return new OrderHistoryPage(webDriver);
     }
 

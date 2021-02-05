@@ -23,7 +23,7 @@ public class TShirtProductPage implements StandardProcedures, ItemPopup{
         this.webDriver = webDriver;
     }
 
-    public void addTShirtToCart(){
+    public TShirtProductPage addTShirtToCart(){
         Dimension d = new Dimension(1920, 1080);
         webDriver.manage().window().setSize(d);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -31,7 +31,7 @@ public class TShirtProductPage implements StandardProcedures, ItemPopup{
         Actions actions = new Actions(webDriver);
         actions.moveToElement(webElementList.get(0)).moveToElement(webElementList.get(0).findElement(By.className("button-container"))).click();
         actions.perform();
-
+        return this;
     }
 
     @Override
