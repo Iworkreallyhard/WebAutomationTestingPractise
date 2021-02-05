@@ -2,8 +2,9 @@ package com.spartaglobal.pageobjectmodel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class CheckoutSignInPage {
+public class CheckoutSignInPage implements Login{
     WebDriver webDriver;
     By createEmail = By.id("email_create");
     By submitCreateAccount = By.id("SubmitCreate");
@@ -63,4 +64,25 @@ public class CheckoutSignInPage {
     }
 
 
+    @Override
+    public WebElement selectLoginEmail() {
+       return webDriver.findElement(loginEmail);
+    }
+
+    @Override
+    public WebElement selectLoginPassword() {
+       return webDriver.findElement(loginPassword);
+    }
+
+    @Override
+    public WebElement selectLoginButton() {
+       return webDriver.findElement(submitLogin);
+    }
+
+    @Override
+    public MyAccount login(String username, String password) {
+       selectLoginEmail().sendKeys(username);
+       selectLoginPassword().sendKeys(password);
+       return new MyAccount(webDriver);
+    }
 }

@@ -7,16 +7,19 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class CheckoutSummary {
+
+public class CheckoutSummary implements StandardProcedures{
 
     WebDriver webDriver;
 
-    By plusIcon = By.className("icon-plus");
-    By minusIcon = By.className("icon-minus");
-    By trashIcon = By.className("icon-trash");
+    By plusIcon = By.cssSelector("i[class*='plus']");
+    By minusIcon = By.className("i[class*='minus']");
+    By trashIcon = By.className("i[class*='trash']");
     By checkoutButton = By.linkText("Proceed to checkout");
     By quantityBox = By.className("cart_quantity_input form-control grey");
     By continueShopping = By.linkText("Continue shopping");
+    By cart = By.cssSelector("a[title*='shopping cart']");
+    By logo = By.cssSelector("img[class*='logo']");
 
     public CheckoutSummary(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -75,12 +78,30 @@ public class CheckoutSummary {
                 return webElement.getAttribute("value");
             }
         }
+
         return null;
     }
 
 
+    @Override
+    public WebElement selectCart() {
+        return webDriver.findElement(cart);
+    }
 
+    @Override
+    public WebElement selectLogo() {
+        return webDriver.findElement(logo);
+    }
 
+    @Override
+    public HomePage gotoHome(WebDriver webDriver) {
+        selectLogo().click();
+        return new HomePage(webDriver);
+    }
 
-
+    @Override
+    public CheckoutSummary gotoCart(WebDriver webDriver) {
+        selectCart().click();
+        return new CheckoutSummary(webDriver);
+    }
 }
