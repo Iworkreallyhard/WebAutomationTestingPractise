@@ -27,15 +27,13 @@ public class LoginStepdefs {
     private MyAccount myAccount;
     private Properties properties = new Properties();
 
-//    @After
-//    public void closeDrivers(){
-//        webDriver.close();
-//    }
-//
-//    @AfterAll
-//    public void quitDrivers(){
-//        webDriver.quit();
-//    }
+    private void loadProperties(){
+        try {
+            properties.load(new FileReader("src/test/resources/login.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Given("I am not logged in")
     public void iAmNotLoggedIn() {
@@ -45,11 +43,7 @@ public class LoginStepdefs {
 
     @When("I am logging in")
     public void iAmLoggingIn() {
-        try {
-            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadProperties();
         SignInPage signInPage = homePage.goToSignInPage();
         signInPage.signIn(properties.getProperty("username"), properties.getProperty("password"));
     }
@@ -70,11 +64,7 @@ public class LoginStepdefs {
 
     @When("I am logging in through checkout")
     public void iAmLoggingInThroughCheckout() {
-        try {
-            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadProperties();
         CheckoutSummary checkoutSummary = new CheckoutSummary(webDriver);
         CheckoutSignInPage checkoutSignInPage = checkoutSummary.goToCheckoutNotLoggedIn();
         checkoutSignInPage.login(properties.getProperty("username"), properties.getProperty("password"));
@@ -88,11 +78,7 @@ public class LoginStepdefs {
 
     @Given("I am logged in")
     public void iAmLoggedIn() {
-        try {
-            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadProperties();
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
         SignInPage signInPage = homePage.goToSignInPage();
@@ -113,11 +99,7 @@ public class LoginStepdefs {
 
     @Given("I am logged in with {int} item in basket")
     public void iAmLoggedInWithItemInBasket(int arg0) {
-        try {
-            properties.load(new FileReader("src/test/resources/loginDetails.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadProperties();
         webDriver = new ChromeDriver();
         homePage = new HomePage(webDriver);
         SignInPage signInPage = homePage.goToSignInPage();
