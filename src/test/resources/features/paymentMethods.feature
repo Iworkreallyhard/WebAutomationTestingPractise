@@ -2,7 +2,7 @@ Feature: Different payment methods return confirmation
 
   Background: I am logged in and have items in my cart
     Given I am logged in as a user
-    And I have 4 items in my cart
+    And I have 2 items in my cart
 
   Scenario: Paying by bank wire will return me a confirmation page
     Given I am at selecting payment method

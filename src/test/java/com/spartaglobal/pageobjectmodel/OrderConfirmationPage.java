@@ -8,7 +8,7 @@ public class OrderConfirmationPage implements StandardProcedures {
 
     private final WebDriver webDriver;
     By logo = By.cssSelector("img[class*='logo']");
-    By cart = By.cssSelector("a[title*='shopping cart']");
+    By cart = By.cssSelector("div[class='shopping_cart']");
 
     public OrderConfirmationPage(WebDriver webDriver) {
         this.webDriver = webDriver;

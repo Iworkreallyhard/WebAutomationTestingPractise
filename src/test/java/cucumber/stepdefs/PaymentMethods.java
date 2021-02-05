@@ -6,7 +6,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,6 +25,9 @@ public class PaymentMethods {
     ConfirmationPage confirmationPage;
     OrderConfirmationPage orderConfirmationPage;
     Properties properties = new Properties();
+    CheckoutSummary checkoutSummary;
+    ShippingPage shippingPage;
+    WebDriver webDriver;
 
     {
         try {
@@ -30,21 +39,25 @@ public class PaymentMethods {
 
     @Given("I am logged in as a user")
     public void iAmLoggedInAsAUser() {
-        homePage = new HomePage(new ChromeDriver());
+        webDriver = new ChromeDriver();
+        homePage = new HomePage(webDriver);
         homePage.goToSignInPage().signIn(properties.getProperty("username"), properties.getProperty("password"))
                 .clickHomeButton();
     }
 
     @And("I have {int} item(s) in my/the cart")
     public void iHaveItemsInMyCart(int arg0) {
-        for (int i = 0; i < arg0 ; i++) {
-            homePage.addTShirtToCart();
+        checkoutSummary = homePage.goToTShirtProductsPage().addTShirtToCart().gotoCart(webDriver);
+        if(arg0 > 1) {
+            for (int i = 0; i < arg0 - 1; i++) {
+                checkoutSummary.clickIncreaseQuantityOneProduct();
+            }
         }
     }
 
     @Given("I am at selecting payment method/step")
     public void iAmAtSelectingPaymentMethodStep() {
-        ShippingPage shippingPage = homePage.goToCheckout().goToCheckoutLoggedIn().goToCheckout();
+        shippingPage = checkoutSummary.goToCheckoutLoggedIn().goToCheckout();
         shippingPage.clickOnAgreeToTC();
         paymentPage = shippingPage.clickCheckout();
     }
@@ -61,12 +74,22 @@ public class PaymentMethods {
 
     @Then("I am shown an order confirmation")
     public void iAmShownAnOrderConfirmation() {
-//        Assertions.assertTrue(orderConfirmationPage.showsConfirmation());
+        Assertions.assertTrue(webDriver.getCurrentUrl().contains("order-confirmation"));
+//        get null pointer
     }
 
-    @And("My cart is empty")
+    @Then("My cart is empty")
     public void myCartIsEmpty() {
-//        Assertions.assertTrue(orderConfirmationPage.cartIsEmpty());
+
+        WebElement webElement = orderConfirmationPage.selectCart();
+        new Actions(webDriver).moveToElement(webElement).perform();
+        boolean b = false;
+        try {
+            webElement.findElement(By.cssSelector("dl[class='products']"));
+        } catch(Exception e) {
+            b = true;
+        }
+        Assertions.assertTrue(b);
     }
 
     @When("I select pay by check")
@@ -74,8 +97,13 @@ public class PaymentMethods {
         confirmationPage = paymentPage.clickPayByCheck();
     }
 
-    @And("My order should be logged with payment method {string}")
+    @Then("My order should be logged with payment method {string}")
     public void myOrderShouldBeLoggedAsWithPaymentMethod(String arg0) {
-
+        if (arg0.equals("Bank wire")) {
+            String bankWire = webDriver.findElement(By.cssSelector("")).getText();
+            Assertions.assertEquals("bank wire", bankWire);
+        } else {
+//            String check = webDriver.findElement().getText();
+        }
     }
 }
