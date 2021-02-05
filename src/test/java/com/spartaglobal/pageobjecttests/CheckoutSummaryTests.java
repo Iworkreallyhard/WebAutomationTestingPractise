@@ -48,15 +48,13 @@ public class CheckoutSummaryTests {
     }
     @Test
     void canGoToAddressPage(){
-        WebDriver driver = new ChromeDriver();
-        HomePage testHomePage = new HomePage(driver);
-        SignInPage signInPage = testHomePage.goToSignInPage();
+        SignInPage signInPage = homePage.goToSignInPage();
         signInPage.signIn(username,password);
         signInPage.clickLogo();
         homePage.addTShirtToCart();
-        CheckoutSummary checkoutSummary = testHomePage.proceedToCheckoutFromPopUp();
+        CheckoutSummary checkoutSummary = homePage.proceedToCheckoutFromPopUp();
         checkoutSummary.goToCheckoutLoggedIn();
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1", driver.getCurrentUrl());
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=order&step=1", webDriver.getCurrentUrl());
     }
 
     @AfterEach
