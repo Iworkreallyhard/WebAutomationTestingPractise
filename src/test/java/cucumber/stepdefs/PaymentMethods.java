@@ -90,7 +90,7 @@ public class PaymentMethods {
         boolean b = false;
         try {
             webElement.findElement(By.cssSelector("dl[class='products']"));
-        } catch(Exception e) {
+        } catch(NoSuchElementException e) {
             b = true;
         }
         Assertions.assertTrue(b);
@@ -103,7 +103,14 @@ public class PaymentMethods {
 
     @Then("My order should be logged with payment method {string}")
     public void myOrderShouldBeLoggedAsWithPaymentMethod(String arg0) {
-        String word = webDriver.findElement(By.cssSelector("div[class='box']")).getText();
+        String word = null;
+        if(arg0.equals("Bank wire")) {
+            word = webDriver.findElement(By.cssSelector("div[class='box']")).getText();
+        }
+        if(arg0.equals("Payment by check")){
+            word = webDriver.findElement(By.cssSelector("div[class='box order-confirmation']")).getText();
+        }
+
         Pattern pattern = Pattern.compile(".*(?<reference>[A-Z]{9}).*", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(word);
         String payment = "";
