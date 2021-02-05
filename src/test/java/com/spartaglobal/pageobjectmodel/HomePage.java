@@ -116,4 +116,13 @@ public class HomePage implements StandardProcedures, ItemPopup {
         webDriver.findElement(TShirtProduct).click();
         return new TShirtProductPage(webDriver);
     }
+
+    public ItemPage addTShirtViaItemPage() {
+        List<WebElement> webElementList= webDriver.findElements(By.className("product-container"));
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(webElementList.get(0)).click(webElementList.get(0).findElement(By.cssSelector("div[class='left-block']")));
+        actions.perform();
+
+        return new ItemPage(webDriver);
+    }
 }
