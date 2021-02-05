@@ -1,6 +1,7 @@
 package cucumber.stepdefs;
 
 import com.spartaglobal.pageobjectmodel.*;
+import io.cucumber.java.bs.I;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -63,47 +64,46 @@ public class AddToCart {
 
     @When("I add {int} items of a product")
     public void iAddItemsOfAProduct(int arg0) {
-
+        webDriver.findElement(By.linkText("Faded Short Sleeve T-shirts")).click();
+        WebDriverWait wait = new WebDriverWait(webDriver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("quantity_wanted")));
         webDriver.findElement(By.id("quantity_wanted")).sendKeys(Keys.chord(Keys.BACK_SPACE, String.valueOf(arg0)));
         webDriver.findElement(By.id("add_to_cart")).click();
     }
 
-    @And("{int} more items are in the cart")
+    @Then("{int} more items are in the cart")
     public void moreItemsAreInTheCart(int arg0) {
         WebDriverWait wait = new WebDriverWait(webDriver,10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ajax_cart_quantity")));
         String numOfProducts = webDriver.findElement(By.className("ajax_cart_quantity")).getText();
         Assertions.assertEquals(String.valueOf(arg0), numOfProducts);
-        //nk
     }
 
     @When("I click continue shopping button")
     public void iClickContinueShoppingButton() {
-        itemPage.continueShopping();
-       // webDriver.findElement(By.className("continue btn btn-default button exclusive-medium")).click();
+        ItemPage itemPage = new ItemPage(webDriver);
+        itemPage.gotoHome(webDriver);
     }
 
-    @Then("success message is closed")
-    public void successMessageIsClosed() {
-        itemPage.selectX();
-     //   webDriver.findElement(By.className("cross")).click();
-       // webDriver.findElement(By.linkText("Close window")).click();
+    @Then("I go back to the homepage")
+    public void goBackToTheHomepage() {
+       Assertions.assertEquals(webDriver.getCurrentUrl(),"http://automationpractice.com/index.php");
     }
 
     @When("I click proceed to checkout button")
     public void iClickProceedToCheckoutButton() {
-        webDriver.findElement(By.className("btn btn-default button button-medium")).click();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        webDriver.findElement(By.linkText("Proceed to checkout")).click();
     }
 
     @Then("I go to checkout")
     public void iGoToCheckout() {
-        //should take to shopping cart summary page
         checkoutSummary = new CheckoutSummary(webDriver);
+        Assertions.assertEquals(webDriver.getCurrentUrl(),"http://automationpractice.com/index.php?controller=order");
     }
 
     @When("I click the remove button")
     public void iClickTheRemoveButton() {
-        /* drop down from shopping cart different from shopping cart summary*/
     }
 
     @Then("the product is removed from the cart")
@@ -118,8 +118,6 @@ public class AddToCart {
     @Then("product quantity is increased by {int}")
     public void productQuantityIsIncreasedBy(int arg0) {
         checkoutSummary.insertQuantityIntoBox((String.valueOf(arg0)));
-        //remove form-control grey potentially
-        //webDriver.findElement(By.className("cart_quantity_input form-control grey")).sendKeys(Keys.chord(Keys.BACK_SPACE,String.valueOf(arg0)));
     }
 
     @When("I click decrease")
@@ -171,4 +169,17 @@ public class AddToCart {
     @Then("I see items has not changed")
     public void iSeeItemsHasNotChanged() {
     }
+
+    @Given("I have an item in the cart")
+    public void iHaveAnItemInTheCart() {
+        webDriver = new ChromeDriver();
+        homePage = new HomePage(webDriver);
+        webDriver.findElement(By.linkText("Faded Short Sleeve T-shirts")).click();
+        WebDriverWait wait = new WebDriverWait(webDriver, 5);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("add_to_cart")));
+        webDriver.findElement(By.id("add_to_cart")).click();
+    }
+
+
+
 }
