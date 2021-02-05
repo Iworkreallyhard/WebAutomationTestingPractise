@@ -1,6 +1,4 @@
-# new feature
-# Tags: optional
-
+@login
 Feature: Logging in and out
 
   Scenario: I am logging in through sign in button
@@ -8,7 +6,6 @@ Feature: Logging in and out
     When I am logging in
     Then I should be logged in
 
-  @login
   Scenario: I am logging in during the checkout process
     Given I am not logged in
     And I am checking out with 1 items in the basket
@@ -23,4 +20,4 @@ Feature: Logging in and out
   Scenario: I am logging out with products in the basket
     Given I am logged in with 1 item in basket
     When I am logging out
-    Then I should have 0 items in my basket
+    Then I should have empty cart
