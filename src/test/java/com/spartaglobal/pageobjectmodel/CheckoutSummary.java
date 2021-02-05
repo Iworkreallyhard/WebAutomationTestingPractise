@@ -12,9 +12,9 @@ public class CheckoutSummary implements StandardProcedures{
 
     WebDriver webDriver;
 
-    By plusIcon = By.className("icon-plus");
-    By minusIcon = By.className("icon-minus");
-    By trashIcon = By.className("icon-trash");
+    By plusIcon = By.cssSelector("i[class*='plus']");
+    By minusIcon = By.className("i[class*='minus']");
+    By trashIcon = By.className("i[class*='trash']");
     By checkoutButton = By.linkText("Proceed to checkout");
     By quantityBox = By.className("cart_quantity_input form-control grey");
     By continueShopping = By.linkText("Continue shopping");

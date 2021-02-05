@@ -15,7 +15,7 @@ public class OrderConfirmationPage implements StandardProcedures {
     }
 
     public OrderHistoryPage clickBackToOrders() {
-        webDriver.findElement(By.cssSelector("#center_column > p.cart_navigation.exclusive > a"));
+        webDriver.findElement(By.cssSelector("p[class*='cart_navigation'] a[title*='Back to orders']")).click();
         return new OrderHistoryPage(webDriver);
     }
 

@@ -16,7 +16,10 @@ import org.openqa.selenium.remote.RemoteWebElement;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PaymentMethods {
 
@@ -28,6 +31,7 @@ public class PaymentMethods {
     CheckoutSummary checkoutSummary;
     ShippingPage shippingPage;
     WebDriver webDriver;
+    OrderHistoryPage orderHistoryPage;
 
     {
         try {
@@ -99,11 +103,20 @@ public class PaymentMethods {
 
     @Then("My order should be logged with payment method {string}")
     public void myOrderShouldBeLoggedAsWithPaymentMethod(String arg0) {
-        if (arg0.equals("Bank wire")) {
-            String bankWire = webDriver.findElement(By.cssSelector("")).getText();
-            Assertions.assertEquals("bank wire", bankWire);
-        } else {
-//            String check = webDriver.findElement().getText();
+        String word = webDriver.findElement(By.cssSelector("div[class='box']")).getText();
+        Pattern pattern = Pattern.compile(".*(?<reference>[A-Z]{9}).*", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(word);
+        String payment = "";
+        System.out.println(word);
+        if(matcher.matches()) {
+            orderHistoryPage = orderConfirmationPage.clickBackToOrders();
+            List<WebElement> list = webDriver.findElements(By.cssSelector("table#order-list tr[class*='item']"));
+            for (WebElement webElement : list) {
+                if(webElement.findElement(By.cssSelector("a[class='color-myaccount']")).getText().contains(matcher.group("reference"))) {
+                    payment = webElement.findElement(By.cssSelector("td[class='history_method']")).getText();
+                }
+            }
         }
+        Assertions.assertTrue(payment.contains(arg0));
     }
 }
